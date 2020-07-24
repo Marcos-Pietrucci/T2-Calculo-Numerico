@@ -24,7 +24,7 @@ xs = np.arange(-1.01, 1.01, 0.01)
 fig, ax = plt.subplots(figsize=(6.5, 4))
 ax.plot(xs, f(xs), label='Funcao original')
 ax.plot(x, y, 'o', label='Pontos')
-ax.plot(xs, cs(xs), label="Splice cubica")
+ax.plot(xs, cs(xs), label="Spline cubica")
 ax.set_xlim(-1.5, 1.5)
 ax.legend(loc='upper left')
 
