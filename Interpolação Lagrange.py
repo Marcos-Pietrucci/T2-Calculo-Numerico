@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import lagrange
 from numpy.polynomial.polynomial import Polynomial
 
-
+'''
+O codigo da Interpolação de Lagrange e seus graficos foram modificados da seguinte fonte:
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.lagrange.html
+'''
 
 def f(x):
     return 1.0/(1.0 + 25*x*x)
