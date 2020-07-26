@@ -7,26 +7,25 @@ O codigo de geracao de splines cubicas e seus graficos foi modificado da seguint
 https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html
 '''
 
-#Funcao do enunciado
 def f(x):
-    return 1.0/(1.0 + 25*x*x)
+    return 1.0/(1.0 + 25.0*x*x)
 
-#Gerando pontos igualmente espacados em relacao ao eixo x
-x = np.arange(-1.01, 1.01, 0.5)
-y = f(x)
+xOriginal = np.linspace(-1.0, 1.0,1000) 
+yOriginal = f(xOriginal)
 
-#Aplicando spline cubica natural
-cs = CubicSpline(x, y, bc_type='natural')
+xPontos = np.linspace(-1.0, 1.0, 5)
+yPontos = f(xPontos)
 
- #Gerando pontos nos quais calcularemos os valores de f(x) e da spline cubica
-xs = np.arange(-1.01, 1.01, 0.01) 
+cs = CubicSpline(xPontos, yPontos, bc_type='natural')
 
-fig, ax = plt.subplots(figsize=(6.5, 4))
-ax.plot(xs, f(xs), label='Funcao original')
-ax.plot(x, y, 'o', label='Pontos')
-ax.plot(xs, cs(xs), label="Spline cubica")
-ax.set_xlim(-1.5, 1.5)
-ax.legend(loc='upper left')
+xcs = np.linspace(-1.0, 1.0,1000) 
+ycs = cs(xcs)
+
+plt.plot(xOriginal,yOriginal,label = "Função Original")
+plt.plot(xPontos, yPontos,'o',label = "Pontos")
+plt.plot(xcs, ycs, label="Spline cubica")
+plt.xlim(-1.5, 1.5)
+plt.ylim(-0.4, 1.2)
+plt.legend(loc='upper left')
 
 plt.show()
-
