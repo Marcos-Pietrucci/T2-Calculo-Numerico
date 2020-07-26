@@ -24,6 +24,7 @@ yInterpolacao = poly(xInterpolacao)
 
 plt.plot(xOriginal,yOriginal,label = "Função Original")
 plt.plot(xPontos,yPontos,'o',label = "Pontos")
+
 plt.plot(xInterpolacao,yInterpolacao,label = "Polinomio da Interpolação")
 plt.xlim(-1.5, 1.5)
 plt.ylim(-0.4,1.2)
