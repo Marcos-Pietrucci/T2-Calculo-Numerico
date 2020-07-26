@@ -11,12 +11,13 @@ def f(x):
 xOriginal = np.linspace(-1, 1,1000) 
 yOriginal = f(xOriginal)
 
-
+#                         O k é o 20
 xPontos = np.linspace(-1, 1,20) 
 yPontos = f(xPontos)
 
 poly = lagrange(xPontos,yPontos)
 
+#erro = abs(f(xInterpolacao) - poly(xInterpolacao))
 
 xInterpolacao = np.linspace(-1, 1,1000) 
 yInterpolacao = poly(xInterpolacao)
