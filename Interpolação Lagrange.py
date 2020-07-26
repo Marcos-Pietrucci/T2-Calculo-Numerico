@@ -3,30 +3,42 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import lagrange
 from numpy.polynomial.polynomial import Polynomial
 
-
+'''
+O codigo da Interpolação de Lagrange e seus graficos foram modificados da seguinte fonte:
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.lagrange.html
+'''
 
 def f(x):
-    return 1.0/(1.0 + 25*x*x)
+    return 1.0/(1.0 + 25.0*x*x)
 
-xOriginal = np.linspace(-1, 1,1000) 
+xOriginal = np.linspace(-1.0, 1.0,1000) 
 yOriginal = f(xOriginal)
 
+<<<<<<< HEAD
 #                         O k é o 20
 xPontos = np.linspace(-1, 1,20) 
+=======
+xPontos = np.linspace(-1.0, 1.0,20) 
+>>>>>>> 47ed85dfed3a492f19bd61df46dbce0804f1bb0b
 yPontos = f(xPontos)
 
 poly = lagrange(xPontos,yPontos)
 
+<<<<<<< HEAD
 #erro = abs(f(xInterpolacao) - poly(xInterpolacao))
 
 xInterpolacao = np.linspace(-1, 1,1000) 
+=======
+xInterpolacao = np.linspace(-1.0, 1.0,1000) 
+>>>>>>> 47ed85dfed3a492f19bd61df46dbce0804f1bb0b
 yInterpolacao = poly(xInterpolacao)
-
 
 plt.plot(xOriginal,yOriginal,label = "Função Original")
 plt.plot(xPontos,yPontos,'o',label = "Pontos")
-plt.plot(xInterpolacao,yInterpolacao,label = "Função Interpolação")
-plt.legend(loc='upper left') 
-plt.ylim((-0.4,1.2))
+
+plt.plot(xInterpolacao,yInterpolacao,label = "Polinomio da Interpolação")
+plt.xlim(-1.5, 1.5)
+plt.ylim(-0.4,1.2)
+plt.legend(loc='upper left')
 
 plt.show() 
