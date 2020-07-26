@@ -10,29 +10,25 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpli
 def f(x):
     return 1.0/(1.0 + 25.0*x*x)
 
-<<<<<<< HEAD
-#Gerando pontos igualmente espacados em relacao ao eixo x
-#x = np.arange(-1.01, 1.01, 0.5)
-x = np.arange(-1.01, 1.01, 0.4)
-y = f(x)
-=======
-xOriginal = np.linspace(-1.0, 1.0,1000) 
-yOriginal = f(xOriginal)
->>>>>>> 47ed85dfed3a492f19bd61df46dbce0804f1bb0b
+x_k = np.linspace(3, 29, 26)
+e = []
+xOriginal = np.linspace(-1.0, 1.0, 1000)
 
-xPontos = np.linspace(-1.0, 1.0, 5)
-yPontos = f(xPontos)
+for i in range(3, 29, 1):
 
-<<<<<<< HEAD
- #Gerando pontos nos quais calcularemos os valores de f(x) e da spline cubica
-xs = np.arange(-1.01, 1.01, 0.01)
-#xs = np.arange(-1.01, 1.01, 0.001) 
-=======
-cs = CubicSpline(xPontos, yPontos, bc_type='natural')
->>>>>>> 47ed85dfed3a492f19bd61df46dbce0804f1bb0b
+    yOriginal = f(xOriginal)
 
-xcs = np.linspace(-1.0, 1.0,1000) 
-ycs = cs(xcs)
+    xPontos = np.linspace(-1.0, 1.0, i)
+    yPontos = f(xPontos)
+
+    cs = CubicSpline(xPontos, yPontos, bc_type='natural')
+
+    xcs = np.linspace(-1.0, 1.0, 1000) 
+    ycs = cs(xcs)
+
+    #Cálculo do erro
+    e_aux = abs(f(xOriginal) - cs(xOriginal))
+    e.append(float(np.amax(e_aux)))
 
 plt.plot(xOriginal,yOriginal,label = "Função Original")
 plt.plot(xPontos, yPontos,'o',label = "Pontos")
@@ -40,5 +36,11 @@ plt.plot(xcs, ycs, label="Spline cubica")
 plt.xlim(-1.5, 1.5)
 plt.ylim(-0.4, 1.2)
 plt.legend(loc='upper left')
+
+plt.show()
+
+plt.plot(x_k, e, label = "Função Erro")
+plt.plot(x_k, e, 'o', label = "Pontos do Erro")
+plt.legend(loc='upper right')
 
 plt.show()
