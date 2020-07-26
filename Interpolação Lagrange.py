@@ -11,16 +11,25 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.lagrange.
 def f(x):
     return 1.0/(1.0 + 25.0*x*x)
 
-xOriginal = np.linspace(-1.0, 1.0,1000) 
-yOriginal = f(xOriginal)
+x_k = np.linspace(3, 29, 26)
+e = []
+xOriginal = np.linspace(-1.0, 1.0, 1000)
 
-xPontos = np.linspace(-1.0, 1.0,20) 
-yPontos = f(xPontos)
+for i in range(3, 29, 1):
 
-poly = lagrange(xPontos,yPontos)
+    yOriginal = f(xOriginal)
 
-xInterpolacao = np.linspace(-1.0, 1.0,1000) 
-yInterpolacao = poly(xInterpolacao)
+    xPontos = np.linspace(-1.0, 1.0, i)
+    yPontos = f(xPontos)
+
+    poly = lagrange(xPontos,yPontos)
+
+    xInterpolacao = np.linspace(-1.0, 1.0, 1000) 
+    yInterpolacao = poly(xInterpolacao)
+
+    #Cálculo do erro
+    e_aux = abs(f(xOriginal) - poly(xOriginal))
+    e.append(float(np.amax(e_aux)))
 
 plt.plot(xOriginal,yOriginal,label = "Função Original")
 plt.plot(xPontos,yPontos,'o',label = "Pontos")
@@ -30,4 +39,12 @@ plt.xlim(-1.5, 1.5)
 plt.ylim(-0.4,1.2)
 plt.legend(loc='upper left')
 
-plt.show() 
+plt.show()
+
+plt.plot(x_k, e, label = "Função Erro")
+plt.plot(x_k, e, 'o', label = "Pontos do Erro")
+plt.xlim(0, 32)
+plt.ylim(-30, 600)
+plt.legend(loc='upper left')
+
+plt.show()

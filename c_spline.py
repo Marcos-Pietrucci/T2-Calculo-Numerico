@@ -10,16 +10,25 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpli
 def f(x):
     return 1.0/(1.0 + 25.0*x*x)
 
-xOriginal = np.linspace(-1.0, 1.0,1000) 
-yOriginal = f(xOriginal)
+x_k = np.linspace(3, 29, 26)
+e = []
+xOriginal = np.linspace(-1.0, 1.0, 1000)
 
-xPontos = np.linspace(-1.0, 1.0, 5)
-yPontos = f(xPontos)
+for i in range(3, 29, 1):
 
-cs = CubicSpline(xPontos, yPontos, bc_type='natural')
+    yOriginal = f(xOriginal)
 
-xcs = np.linspace(-1.0, 1.0,1000) 
-ycs = cs(xcs)
+    xPontos = np.linspace(-1.0, 1.0, i)
+    yPontos = f(xPontos)
+
+    cs = CubicSpline(xPontos, yPontos, bc_type='natural')
+
+    xcs = np.linspace(-1.0, 1.0, 1000) 
+    ycs = cs(xcs)
+
+    #Cálculo do erro
+    e_aux = abs(f(xOriginal) - cs(xOriginal))
+    e.append(float(np.amax(e_aux)))
 
 plt.plot(xOriginal,yOriginal,label = "Função Original")
 plt.plot(xPontos, yPontos,'o',label = "Pontos")
@@ -27,5 +36,11 @@ plt.plot(xcs, ycs, label="Spline cubica")
 plt.xlim(-1.5, 1.5)
 plt.ylim(-0.4, 1.2)
 plt.legend(loc='upper left')
+
+plt.show()
+
+plt.plot(x_k, e, label = "Função Erro")
+plt.plot(x_k, e, 'o', label = "Pontos do Erro")
+plt.legend(loc='upper right')
 
 plt.show()
