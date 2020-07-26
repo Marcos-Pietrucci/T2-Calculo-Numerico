@@ -30,5 +30,6 @@ plt.plot(xPontos,yPontos,'o',label = "Pontos")
 plt.plot(xInterpolacao,yInterpolacao,label = "Função Interpolação")
 plt.legend(loc='upper left') 
 plt.ylim((-0.4,1.2))
+plt.xlim((-1.5,1.5))
 
 plt.show() 
