@@ -11,11 +11,11 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpli
 def f(x):
     return 1.0/(1.0 + 25.0*x*x)
 
-x_k = np.linspace(3, 29, 26) #Vetor contendo o numero de pontos utilizados para cada iteracao 
-e_k = [] #Vetor para armazenar o erro maximo para determinado numero de pontos de x_k[]
+x_k = np.linspace(2, 28, 26) #Vetor contendo o valor para k utilizados em cada iteracao 
+e_k = [] #Vetor para armazenar o erro maximo para determinado k de x_k[], correspondendo a k+1 pontos 
 xOriginal = np.linspace(-1.0, 1.0, 1000) #Recurso usado para impressao das funcoes
 
-#Calculo do erro maximo para i pontos utilizados
+#Calculo do erro maximo para i = k+1 pontos utilizados
 for i in range(3, 29, 1):
 
     yOriginal = f(xOriginal)
@@ -49,11 +49,11 @@ plt.legend(loc='upper left')
 plt.show()
 '''
 
-#Plot do erro em funcao de k+1 pontos
+#Plot do erro
 plt.plot(x_k, e_k, label = "Função Erro")
 plt.plot(x_k, e_k, 'o', label = "Pontos do Erro")
-plt.title('Erro em funcao do numero de pontos')
-plt.xlabel('Numero de pontos')
+plt.title('Erro em funcao de k')
+plt.xlabel('k')
 plt.ylabel('Erro')
 plt.legend(loc='upper right')
 
