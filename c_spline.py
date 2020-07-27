@@ -52,8 +52,8 @@ plt.show()
 #Plot do erro em funcao de k+1 pontos
 plt.plot(x_k, e_k, label = "Função Erro")
 plt.plot(x_k, e_k, 'o', label = "Pontos do Erro")
-plt.title('Erro em funcao de (k+1) pontos')
-plt.xlabel('k+1 pontos')
+plt.title('Erro em funcao do numero de pontos')
+plt.xlabel('Numero de pontos')
 plt.ylabel('Erro')
 plt.legend(loc='upper right')
 

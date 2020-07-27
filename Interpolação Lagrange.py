@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import lagrange
 from numpy.polynomial.polynomial import Polynomial
+from scipy.optimize import curve_fit
 
 '''
 O codigo da Interpolação de Lagrange e seus graficos foram modificados da seguinte fonte:
@@ -55,9 +56,46 @@ plt.plot(x_k, e_k, label = "Função Erro")
 plt.plot(x_k, e_k, 'o', label = "Pontos do Erro")
 plt.xlim(0, 32)
 plt.ylim(-30, 600)
-plt.title('Erro em funcao de (k+1) pontos')
-plt.xlabel('k+1 pontos')
+plt.title('Erro em funcao do numero de pontos')
+plt.xlabel('Numero de pontos')
 plt.ylabel('Erro')
 plt.legend(loc='upper left')
 
+plt.show()
+
+'''
+Com n pontos -> dividimos o intervalo [-1, 1], de tamanho 2, em (n-1) partes.
+Assim os pontos distam: 2/(n-1)
+'''
+#Definindo o formato da funcao que relaciona o erro e a distancia entre os pontos
+def errorFunc(h, C, q):
+    return C*(h**q)
+
+#Preenchendo vetor que representa a distancia entre os pontos para dado numero de pontos
+h = []
+
+for j in range(3, 29, 1):
+    h.append(2 / (j-1))
+
+#Usando minimos quadrados para encontrar os parametros C e q
+parametros = curve_fit(errorFunc, h, e_k)
+[C, q] = parametros[0]
+
+print('\nNa aproximacao Ch^q, temos:','\nC = ', C, '\nq = ', q, '\n')
+
+#Definindo a funcao errorFunc com os parametros corretos 
+def error(h):
+    return C*(h**q)
+
+x_error = np.linspace(0.05, 1.1, 1000)
+y_error = error(x_error)
+
+#Plot dos pontos e da funcao error
+plt.plot(h, e_k, 'o', label = 'Pontos do erro')
+plt.plot(x_error, y_error, label = 'Curva ajustada por minimos quadrados (Ch^q)')
+plt.title('Valor do erro em funcao da distancia entre os pontos')
+plt.xlabel('Distancia entre os pontos (h)')
+plt.ylabel('Erro')
+plt.ylim(-50.0, 600.0)
+plt.legend(loc='upper right')
 plt.show()
