@@ -60,5 +60,6 @@ plt.title('Erro em funcao de k')
 plt.xlabel('k')
 plt.ylabel('Erro')
 plt.legend(loc='upper left')
+plt.xticks(range(0, 32, 2))
 
 plt.show()

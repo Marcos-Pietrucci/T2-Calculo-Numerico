@@ -57,6 +57,7 @@ plt.title('Erro em funcao de k')
 plt.xlabel('k')
 plt.ylabel('Erro')
 plt.legend(loc='upper right')
+plt.xticks(range(0, 32, 2))
 plt.show()
 
 #Aproximacao Ch^q para Splines Naturais
